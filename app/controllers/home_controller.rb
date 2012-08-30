@@ -7,6 +7,9 @@ class HomeController < ApplicationController
   def create_project
   end
 
+  def manage_project
+  end
+
   def about
   end
 end

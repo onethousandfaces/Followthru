@@ -7,6 +7,7 @@ FollowThru::Application.routes.draw do
     root :to => 'home#index'
     match "/about" => "home#about", :as => :home_about
     match "/new" => "home#create_project", :as => :home_new
+    match "/manage" => "home#manage_project", :as => :home_manage
     match "/all" => "home#index", :as => :home_all
   end
 

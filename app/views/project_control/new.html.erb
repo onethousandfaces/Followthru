@@ -44,11 +44,11 @@
 	<div class="control-group">
 		<label for="project_type" class="control-label">What is your objective?</label>
 		<div class="controls">
-			<select name="project_type">
-				<option>I am getting something and want to see if others would like some too.</option>
-				<option>I will arrange something if enough people are interested.</option>
-				<option>I am organising a gift and wish to let people contribute.</option>
-				<option>I have an idea and would like people support me.</option>
+			<select name="project_type" ng-model="project.objective">
+				<option value="Shopping">I am getting something and want to see if others would like some too.</option>
+				<option value="Project">I will arrange something if enough people are interested.</option>
+				<option value="Gift">I am organising a gift and wish to let people contribute.</option>
+				<option value="Idea">I have an idea and would like people support me.</option>
 			</select>
 		</div>
 	</div>
@@ -56,7 +56,7 @@
 	<div class="control-group">
 		<div class="controls">
 			<label class="checkbox">
-				<input type="checkbox" value="" checked>
+				<input type="checkbox" value="" checked ng-model="public">
 				This project is open to everyone.
 				<p><small>Unticking this box means only people who have the link will be able to find your project.</small></p>
 			</label>

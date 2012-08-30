@@ -12,13 +12,18 @@
 </script>
 
 <div ng-controller="ListProjectController">
-  <h2>You have <strong ng-model="projectCount">{{ projectCount }}</strong> open projects</h2>
+  <h2>You have <strong ng-model="projectCount">{{ projects.new.count }}</strong> open projects</h2>
 
-	<div class="container-inner">
+	<div class="container-inner" ng-hide="projects.new.count">
+    You don't have any active projects.
+  </div>
+
+	<div class="container-inner" ng-show="projects.new.count">
 		<table class="table">
 			<thead>
 				<tr>
 					<th>Image</th>
+					<th>Status</th>
 					<th>Name</th>
 					<th>Desc</th>
 					<th>Objective</th>
@@ -29,12 +34,13 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="project in projects">
+				<tr ng-repeat="project in projects.new.items">
 					<td>{{project.id}} {{project.image}}</td>
+					<td>{{project.status}}</td>
 					<td>{{project.name}}</td>
 					<td>{{project.desc}}</td>
-					<td>{{project.private}}</td>
 					<td>{{project.objective}}</td>
+					<td>{{project.private}}</td>
 					<td><i class="icon icon-eye-open" /> <small><a href="{{project.viewUrl}}">Show</a></small></td>
 					<td><i class="icon icon-edit" /> <small><a href="{{project.editUrl}}">Edit</a></small></td>
 					<td><i class="icon icon-trash" /> <small><a href="{{project.deleteUrl}}">Delete forever</a></small></td>
@@ -45,7 +51,11 @@
 
   <h2>Successful projects</h2>
 
-	<div class="container-inner">
+	<div class="container-inner" ng-hide="projects.success.count">
+    You don't have any successful projects yet.
+  </div>
+
+	<div class="container-inner" ng-show="projects.success.count">
 		<table class="table">
 			<thead>
 				<tr>
@@ -58,7 +68,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="project in projects">
+				<tr ng-repeat="project in projects.success.items">
 					<td>{{project.id}} {{project.image}}</td>
 					<td>{{project.name}}</td>
 					<td>{{project.desc}}</td>
@@ -72,7 +82,11 @@
 
   <h2>Shelved projects</h2>
 
-	<div class="container-inner">
+	<div class="container-inner" ng-hide="projects.failed.count">
+    You don't have any shelved projects yet.
+  </div>
+
+	<div class="container-inner" ng-show="projects.failed.count">
 		<table class="table">
 			<thead>
 				<tr>
@@ -85,7 +99,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="project in projects">
+				<tr ng-repeat="project in projects.failed.items">
 					<td>{{project.id}} {{project.image}}</td>
 					<td>{{project.name}}</td>
 					<td>{{project.desc}}</td>

@@ -4,9 +4,16 @@ var CreateProjectController = function($scope, Project) {
   $scope.hasErrors = false;
   $scope.errors = {};
   $scope.success = false;
+  $scope.public = true;
+
+  /* Default values */
+  $scope.project.objective = "Idea";
+  $scope.project.name = "Project name";
+  $scope.project.desc = "Project description";
 
   /** Create the project or list errors */
   $scope.create = function() {
+    $scope.project.private = !$scope.public;
     $scope.project.$create(function(data) {
       $scope.success = true;
       $scope.hasErrors = false;
@@ -24,11 +31,11 @@ CreateProjectController.$inject = ['$scope', 'Project'];
 var ListProjectController = function($scope, Project) {
   $scope.nav = function(url) { document.location = url; }
   $scope.projects = {
-    'new' : {items : [], count : 0 },
-    'active' : {items : [], count : 0 },
-    'success' : {items : [], count : 0 },
-    'failed' : {items : [], count : 0 },
-    'closed' : {items : [], count : 0 }
+    'new' : { key : 0, items : [], count : 0 },
+    'active' : { key : 1, items : [], count : 0 },
+    'success' : { key : 2, items : [], count : 0 },
+    'failed' : { key : 3, items : [], count : 0 },
+    'closed' : { key : 4, items : [], count : 0 }
   };
 
   Project.query(function(data) {
@@ -40,19 +47,18 @@ var ListProjectController = function($scope, Project) {
       data[d].deleteUrl = ListProjectControllerData.baseDeleteUrl + "/" + data[d].id;
 
       /* split into status batches */
-      if (data[d].status == 0) $scope.projects.new.items.push(data[d])
-      else if (data[d].status == 1) $scope.projects.active.items.push(data[d])
-      else if (data[d].status == 2) $scope.projects.success.items.push(data[d])
-      else if (data[d].status == 3) $scope.projects.failed.items.push(data[d])
-      else if (data[d].status == 4) $scope.projects.closed.items.push(data[d])
+      for (var t in $scope.projects) {
+        if (data[d].status == $scope.projects[t].key) {
+          data[d].status = t;
+          $scope.projects[t].items.push(data[d]);
+        }
+      }
     }
 
     /* update project counts */
-    $scope.projects.new.items.count = $scope.projects.new.items.length;
-    $scope.projects.active.items.count = $scope.projects.active.items.length;
-    $scope.projects.success.items.count = $scope.projects.success.items.length;
-    $scope.projects.failed.items.count = $scope.projects.failed.items.length;
-    $scope.projects.closed.items.count = $scope.projects.closed.items.length;
+    for (var t in $scope.projects) {
+      $scope.projects[t].count = $scope.projects[t].items.length;
+    }
   });
 }
 

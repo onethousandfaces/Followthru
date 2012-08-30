@@ -2,7 +2,8 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.all
+    ud = UserDataFactory.new.get current_user, Userdatum
+    @projects = Project.where("userdatum_id = ?", [ud.id])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,10 +15,12 @@ class ProjectsController < ApplicationController
   # GET /projects/1.json
   def show
     @project = Project.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @project }
+    ud = UserDataFactory.new.get current_user, Userdatum
+    if @project.userdatum_id == ud.id
+      respond_to do |format|
+        format.html # show.html.erb
+        format.json { render json: @project }
+      end
     end
   end
 

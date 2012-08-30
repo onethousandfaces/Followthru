@@ -4,6 +4,15 @@
 
 <div class="container-inner">
 
+<%# Rails doesn't handle urls in the assets pipeline %>
+<script>
+  window.ListProjectControllerData = {
+    'baseEditUrl' : '<%= project_edit_url %>',
+    'baseViewUrl' : '<%= project_view_url %>',
+    'baseDeleteUrl' : '<%= project_delete_url %>',
+  };
+</script>
+
 <div ng-controller="ListProjectController">
   <h2>You have <strong ng-model="projectCount">{{ projectCount }}</strong> open projects</h2>
 
@@ -24,9 +33,9 @@
 					<td>{{project.image}}</td>
 					<td>{{project.name}}</td>
 					<td>{{project.desc}}</td>
-					<td><i class="icon icon-eye-open" /> <small>Show</small></td>
-					<td><i class="icon icon-edit" /> <small>Edit</small></td>
-					<td><i class="icon icon-trash" /> <small>Delete forever</small></td>
+					<td><i class="icon icon-eye-open" /> <small><a href="{{project.viewUrl}}">Show</a></small></td>
+					<td><i class="icon icon-edit" /> <small><a href="{{project.editUrl}}">Edit</a></small></td>
+					<td><i class="icon icon-trash" /> <small><a href="{{project.deleteUrl}}">Delete forever</a></small></td>
 				</tr>
 			</tbody>
 		

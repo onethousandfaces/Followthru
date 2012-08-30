@@ -24,10 +24,29 @@ CreateProjectController.$inject = ['$scope', 'Project'];
 var ListProjectController = function($scope, Project) {
   $scope.projects = [];
   $scope.projectCount = 0;
+  $scope.nav = function(url) { document.location = url; }
+
   Project.query(function(data) {
+    for (var d in data) {
+      data[d].viewUrl = ListProjectControllerData.baseViewUrl + "/" + data[d].id;
+      data[d].editUrl = ListProjectControllerData.baseEditUrl + "/" + data[d].id;
+      data[d].deleteUrl = ListProjectControllerData.baseDeleteUrl + "/" + data[d].id;
+    }
     $scope.projects = data;
     $scope.projectCount = $scope.projects.length;
   });
 }
 
 ListProjectController.$inject = ['$scope', 'Project'];
+
+/** Controller for view project form */
+var ViewProjectController = function($scope, Project) {
+  $scope.project = new Project()
+  Project.get({id:ViewProjectControllerData.id}, function(data) {
+    $scope.project = data;
+  }, function() {
+    alert("Bad id");
+  });
+}
+
+ViewProjectController.$inject = ['$scope', 'Project'];

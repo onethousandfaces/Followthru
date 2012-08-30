@@ -3,7 +3,10 @@ class ProjectControlController < ApplicationController
   end
   def edit
   end
+  def list
+  end
   def view
+    @id = params[:id]
   end
   def delete
   end

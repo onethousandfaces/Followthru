@@ -1,20 +1,19 @@
 <img src="/images/home_4.jpg" />
 
-<h1 class="introduction">Create a new project</h1>
+<script>
+  window.ViewProjectControllerData = {
+    'id' : <%= @id %>
+  };
+</script>
 
-<h2>Tell us a bit about your project</h2>
-
-<div ng-controller="CreateProjectController">
+<div ng-controller="ViewProjectController">
   <div>
-    Name; <input type="text" ng-model="project.name" value="Project name here">
+    Image: {{project.image}}
   </div>
   <div>
-    Image: <input type="text" ng-model="project.image" value="Image url here, if any">
+    Name: {{project.name}}
   </div>
   <div>
-    Desc: <textarea ng-model="project.desc">Description here</textarea>
-  </div>
-  <div>
-    <input type="button" ng-click="update()" value="Create this project"/>
+    Desc: {{project.desc}}
   </div>
 </div>

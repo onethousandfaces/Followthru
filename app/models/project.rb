@@ -1,8 +1,8 @@
 class Project < ActiveRecord::Base
-  attr_accessible :desc, :image, :name, :userdata_id
+  attr_accessible :desc, :image, :name
 
   belongs_to :userdata
-  has_many :pledgetypes
+  has_many :pledge_types
   has_many :goals
 
   validates :desc, :presence => true, :length => { :maximum => 10000 }

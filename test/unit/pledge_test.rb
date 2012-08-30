@@ -26,12 +26,22 @@ class PledgeTest < ActiveSupport::TestCase
     pt2 = PledgeType.new
     pt2.name = "Pledge type 1"
     pt2.desc = "About pledge"
-    pt2.amount = 10.00
+    pt2.amount = 20.00
     assert pt2.valid?, "Invalid pledge type 1"
 
-    p.pledgetypes.push pt1
-    p.pledgetypes.push pt2
+    p.pledge_types.push pt1
+    p.pledge_types.push pt2
     assert p.valid?, "Invalid project"
     p.save
+
+    # Test 
+    pl = Pledge.new
+    pl.userdatum = ud
+    pl.pledge_type = pt2
+    pl.amount = 15.00
+    assert !p.valid?, "Pledge valid when amount too low"
+
+    pl.pledge_type = pt1
+    assert p.valid?, "Pledge invalid when amount ok"
   end
 end

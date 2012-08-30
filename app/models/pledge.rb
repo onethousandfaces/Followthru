@@ -1,10 +1,10 @@
 require 'PledgeValidator'
 
 class Pledge < ActiveRecord::Base
-  attr_accessible :amount, :userdata_id, :pledgetype_id
+  attr_accessible :amount, :userdatum_id, :pledge_type_id
 
-  belongs_to :userdata
-  has_one :pledgetype
+  belongs_to :userdatum
+  has_one :pledge_type
 
   validates_with PledgeValidator, :fields => [ :amount ]
 end

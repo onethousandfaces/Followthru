@@ -1,8 +1,27 @@
 class PledgeTypesController < ApplicationController
+  # GET /pledge_types/query
+  # GET /pledge_types/query.json
+  def query
+    if !params.has_key?(:project)
+      @pledge_types = []
+    else 
+      ud = UserDataFactory.new.get current_user, Userdatum
+      data = PledgeType.where("userdatum_id = ? AND project_id = ?", ud.id, params[:project])
+      if data.count == 0
+        @pledge_types = []
+      end
+    end
+
+    respond_to do |format|
+      format.json { render json: @pledge_types }
+    end
+  end
+
   # GET /pledge_types
   # GET /pledge_types.json
   def index
-    @pledge_types = PledgeType.all
+    ud = UserDataFactory.new.get current_user, Userdatum
+    @pledge_types = PledgeType.where("userdatum_id = ?", ud.id)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +32,8 @@ class PledgeTypesController < ApplicationController
   # GET /pledge_types/1
   # GET /pledge_types/1.json
   def show
-    @pledge_type = PledgeType.find(params[:id])
+    ud = UserDataFactory.new.get current_user, Userdatum
+    @pledge_type = PledgeType.where("userdatum_id = ? AND id = ?", ud.id, params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -25,6 +45,7 @@ class PledgeTypesController < ApplicationController
   # GET /pledge_types/new.json
   def new
     @pledge_type = PledgeType.new
+    @pledge_type.userdatum = UserDataFactory.new.get current_user, Userdatum
 
     respond_to do |format|
       format.html # new.html.erb
@@ -41,6 +62,7 @@ class PledgeTypesController < ApplicationController
   # POST /pledge_types.json
   def create
     @pledge_type = PledgeType.new(params[:pledge_type])
+    @pledge_type.userdatum = UserDataFactory.new.get current_user, Userdatum
 
     respond_to do |format|
       if @pledge_type.save
@@ -56,7 +78,8 @@ class PledgeTypesController < ApplicationController
   # PUT /pledge_types/1
   # PUT /pledge_types/1.json
   def update
-    @pledge_type = PledgeType.find(params[:id])
+    ud = UserDataFactory.new.get current_user, Userdatum
+    @pledge_type = PledgeType.where("userdatum_id = ? AND id = ?", ud.id, params[:id])
 
     respond_to do |format|
       if @pledge_type.update_attributes(params[:pledge_type])
@@ -72,7 +95,8 @@ class PledgeTypesController < ApplicationController
   # DELETE /pledge_types/1
   # DELETE /pledge_types/1.json
   def destroy
-    @pledge_type = PledgeType.find(params[:id])
+    ud = UserDataFactory.new.get current_user, Userdatum
+    @pledge_type = PledgeType.where("userdatum_id = ? AND id = ?", ud.id, params[:id])
     @pledge_type.destroy
 
     respond_to do |format|

@@ -24,6 +24,7 @@ module.config(["$httpProvider", function(provider) {
     return $resource('/ajax/pledge_types/:id', {id : '@id'}, {
       'create' : { method: 'POST' },
       'save' : { method: 'PUT' },
+      'query' : { method: 'GET', url: '/ajax/pledge_types/query?project=:project_id' },
     });
   });
 

@@ -1,20 +1,83 @@
 <img src="/images/home_4.jpg" />
 
-<h1 class="introduction">Create a new project</h1>
+<h1 class="introduction">Edit project</h1>
 
-<h2>Tell us a bit about your project</h2>
+<script>
+  window.EditProjectControllerData = {
+    id : <%= @id %>
+  };
+</script>
 
-<div ng-controller="CreateProjectController">
-  <div>
-    Name; <input type="text" ng-model="project.name" value="Project name here">
-  </div>
-  <div>
-    Image: <input type="text" ng-model="project.image" value="Image url here, if any">
-  </div>
-  <div>
-    Desc: <textarea ng-model="project.desc">Description here</textarea>
-  </div>
-  <div>
-    <input type="button" ng-click="update()" value="Create this project"/>
+<div ng-controller="EditProjectController">
+  <div hg-show="valid">
+
+    <h2>Tell us a bit about your project</h2>
+    <div>
+      Status: {{project.status}}
+    </div>
+    <div>
+      Name; <input type="text" ng-model="project.name"/>
+    </div>
+    <div>
+      Image: <input type="text" ng-model="project.image"/>
+    </div>
+    <div>
+      Desc: <textarea ng-model="project.desc"></textarea>
+    </div>
+    <div>
+      Objective: <input type="text" ng-model="project.objective"/>
+    </div>
+    <div>
+      Private: <input type="checkbox" ng-model="project.private"/>
+    </div>
+
+    <div>
+      <h3> Pledge Types </h3>
+
+      <div style="border: 1px solid #efefef; padding: 20px; display: inline-block; width: 40%;">
+        Current pledge types:
+
+        <ul ng-show="PledgeTypes.count">
+          <li ng-repeat="item in PledgeTypes">
+            Name: <input type="text" ng-model="projectType.name"/> --
+            Desc: <input type="text" ng-model="projectType.desc"/> --
+            Image: <input type="text" ng-model="projectType.image"/> --
+            Minimum amount for pledge: {{ projectType.amount }} --
+            <button ng-click="editPledgeType({{item.id}})">Edit</button>
+            <button ng-click="deletePledgeType({{item.id}})">Delete</button>
+          </li>
+        </ul>
+
+        <div ng-hide="PledgeTypes.count">
+          No current pledge types
+        </div>
+      </div>
+
+      <div style="border: 1px solid #efefef; padding: 20px; display: inline-block; width: 40%;">
+        <div ng-show="pledgeTypeHasErrors">
+          Errors saving record:
+          <ul>
+            <li ng-repeat="error in pledgeTypeErrors">
+              {{ error.field }} - {{ error.error }}
+            </li>
+          </ul>
+        </div>
+
+        <div ng-show="pledgeTypeSuccess">
+          Record added. <a href="#" ng-click="hidePledgeTypeSuccess()">hide</a>
+        </div>
+
+        <div ng-hide="pledgeTypeSuccess">
+          Id: <input type="text" ng-model="projectType.id"/> <br/>
+          Name: <input type="text" ng-model="projectType.name"/> <br/>
+          Desc: <input type="text" ng-model="projectType.desc"/> <br/>
+          Image: <input type="text" ng-model="projectType.image"/> <br/>
+          Minimum amount for pledge: <input type="text" ng-model="projectType.amount"/> <br/>
+          <button ng-click="addPledgeType()">Save</button>
+          <button ng-click="resetPledgeType()">New record</button>
+        </div>
+      </div>
+
+    </div>
   </div>
 </div>

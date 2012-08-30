@@ -30,6 +30,7 @@
     <div>
       Private: <input type="checkbox" ng-model="project.private"/>
     </div>
+    <button>Update project</button>
 
     <div>
       <h3> Pledge Types </h3>
@@ -88,7 +89,7 @@
 
         <ul ng-show="goalsCount">
           <li ng-repeat="item in goals">
-            Amount: {{ item.amount }} --
+            Amount: {{ item.total }} --
             Pledge type: {{ item.pledge_type_id }} --
             Pledge instances: {{ item.instances }}
             <button ng-click="editGoal({{item.id}})">Edit</button>

@@ -1,27 +1,13 @@
 class PledgeTypesController < ApplicationController
-  # GET /pledge_types/query
-  # GET /pledge_types/query.json
-  def query
-    if !params.has_key?(:project)
-      @pledge_types = []
-    else 
-      ud = UserDataFactory.new.get current_user, Userdatum
-      data = PledgeType.where("userdatum_id = ? AND project_id = ?", ud.id, params[:project])
-      if data.count == 0
-        @pledge_types = []
-      end
-    end
-
-    respond_to do |format|
-      format.json { render json: @pledge_types }
-    end
-  end
-
   # GET /pledge_types
   # GET /pledge_types.json
   def index
     ud = UserDataFactory.new.get current_user, Userdatum
-    @pledge_types = PledgeType.where("userdatum_id = ?", ud.id)
+    if params.has_key?(:project_id) 
+      @pledge_types = PledgeType.where("userdatum_id = ? AND project_id = ?", ud.id, params[:project_id])
+    else
+      @pledge_types = PledgeType.where("userdatum_id = ?", ud.id)
+    end
 
     respond_to do |format|
       format.html # index.html.erb

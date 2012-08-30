@@ -2,9 +2,9 @@ class GoalsController < ApplicationController
   # GET /goals
   # GET /goals.json
   def index
-    if params.has_key(:project_id) 
-      ud = UserDataFactory.new.get current_user, Userdatum
-      @goals = Goal.where("userdatum_id = ? AND project_id = ?", ud.id, params[:project])
+    ud = UserDataFactory.new.get current_user, Userdatum
+    if params.has_key?(:project_id) 
+      @goals = Goal.where("userdatum_id = ? AND project_id = ?", ud.id, params[:project_id])
     else
       @goals = Goal.where("userdatum_id = ?", ud.id)
     end

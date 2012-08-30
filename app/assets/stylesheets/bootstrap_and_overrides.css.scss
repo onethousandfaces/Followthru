@@ -1,7 +1,9 @@
 @import "bootstrap";
 body {
-	padding-top: 90px; 
-	font-family: Arial, sans-serif;
+	padding-top: 69px; 
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	line-height: 20px;
 }
 @import "bootstrap-responsive";
 
@@ -41,17 +43,20 @@ body {
 }
 
 h1 {
-	margin-top: 15px;
-	margin-bottom: 15px;
+	margin: 15px 30px;
 	font-family: 'Source Sans Pro', "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-weight: 700;
 	font-size: 26px;
 	line-height: 35px;
+	&.introduction {
+		margin-top: -50px;
+		margin-bottom: 50px;
+		color: #fff;
+	}
 }
 
 h2 {
-	margin-top: 15px;
-	margin-bottom: 15px;
+	margin: 15px 30px;
 	font-family: 'Source Sans Pro', "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-weight: 700;
 	font-size: 20px;
@@ -59,9 +64,14 @@ h2 {
 	color: #ff9435;
 }
 
-
-
 p {
-	font-size: 14px;
-	line-height: 20px;
+	margin-left: 30px;
+	margin-right: 30px;
+}
+
+table.projects {
+	border-collapse: collapse;
+	td {
+		border-top: dashed 1px #333;
+	}
 }

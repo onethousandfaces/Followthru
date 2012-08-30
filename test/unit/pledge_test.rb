@@ -2,62 +2,7 @@ require 'test_helper'
 
 class PledgeTest < ActiveSupport::TestCase
 
-  def test_pledge_validator_works
-  
-    # Magic user key
-    key = rand(100000)
-    
-    # Setup all the things
-    u = User.new(:email => 'test@test.com', :name => key, 'password' => 'dougdoug')
-    assert u.valid?, "Invalid user"
-    u.save
-
-    ud = Userdatum.new
-    ud.user = u
-    assert ud.valid?, "Invalid user data"
-    ud.save
-
-    p = Project.new
-    p.name = "Project"
-    p.desc = "About project"
-    p.save
-
-    pt1 = PledgeType.new
-    pt1.name = "Pledge type 1"
-    pt1.desc = "About pledge"
-    pt1.amount = 10.00
-    assert pt1.valid?, "Invalid pledge type 1"
-    pt1.save
-
-    pt2 = PledgeType.new
-    pt2.name = "Pledge type 2"
-    pt2.desc = "About pledge"
-    pt2.amount = 20.00
-    assert pt2.valid?, "Invalid pledge type 2"
-    puts pt2.errors.messages
-    pt2.save
-
-    p.pledge_types.push pt1
-    p.pledge_types.push pt2
-    assert p.valid?, "Invalid project"
-    p.save
-
-    # Test 
-    pl = Pledge.new
-    pl.userdatum = ud
-    pl.pledge_type = pt2
-    pl.amount = 15.00
-    puts pl.errors.messages
-    assert !pl.valid?, "Pledge valid when amount too low"
-
-    pl.pledge_type = pt1
-    assert p.valid?, "Pledge invalid when amount ok"
-  end
-
-  def test_can_save_and_restore
-  
-    # Magic user key
-    key = rand(100000)
+  def insert_test_data(key)
     
     # Setup all the things
     u = User.new(:email => 'test@test.com', :name => key, 'password' => 'dougdoug')
@@ -79,6 +24,7 @@ class PledgeTest < ActiveSupport::TestCase
     pt1.name = "Pledge type 1"
     pt1.desc = "About pledge"
     pt1.amount = 10.00
+    pt1.userdatum = ud
     assert pt1.valid?, "Invalid pledge type 1"
     pt1.save
 
@@ -86,6 +32,7 @@ class PledgeTest < ActiveSupport::TestCase
     pt2.name = "Pledge type 2"
     pt2.desc = "About pledge"
     pt2.amount = 20.00
+    pt2.userdatum = ud
     assert pt2.valid?, "Invalid pledge type 2"
     puts pt2.errors.messages
     pt2.save
@@ -99,6 +46,7 @@ class PledgeTest < ActiveSupport::TestCase
     g1.project = p
     g1.total = 100.00
     g1.instances = 0
+    g1.userdatum = ud
     assert g1.valid?, "Invalid goal 1"
     g1.save
 
@@ -106,6 +54,7 @@ class PledgeTest < ActiveSupport::TestCase
     g2.project = p
     g2.total = 100.00
     g2.instances = 0
+    g2.userdatum = ud
     assert g2.valid?, "Invalid goal 2"
     g2.save
 
@@ -118,6 +67,7 @@ class PledgeTest < ActiveSupport::TestCase
     pl.userdatum = ud
     pl.pledge_type = pt1
     pl.amount = 15.00
+    pl.userdatum = ud
     assert pl.valid?, "Invalid pledge type"
 
     ud.pledges.push pl
@@ -125,7 +75,32 @@ class PledgeTest < ActiveSupport::TestCase
     ud.save
 
     u.save
+  end
 
+  def test_pledge_validator_works
+  
+    # Magic user key
+    key = rand(100000)
+    insert_test_data key
+    
+    # Test 
+    pl = Pledge.new
+    pl.userdatum = ud
+    pl.pledge_type = pt2
+    pl.amount = 15.00
+    puts pl.errors.messages
+    assert !pl.valid?, "Pledge valid when amount too low"
+
+    pl.pledge_type = pt1
+    assert p.valid?, "Pledge invalid when amount ok"
+  end
+
+  def test_can_save_and_restore
+  
+    # Magic user key
+    key = rand(100000)
+    insert_test_data key
+    
     # Load all the stuff we just saved
     u = User.where("name = ?", [key]).first
     assert !u.nil?, "No matching user"

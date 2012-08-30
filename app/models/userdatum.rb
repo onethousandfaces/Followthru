@@ -3,4 +3,5 @@ class Userdatum < ActiveRecord::Base
   belongs_to :user
   has_many :pledges
   has_many :projects
+  validates :user, :presence => true
 end

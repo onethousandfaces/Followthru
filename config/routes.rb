@@ -1,15 +1,5 @@
 FollowThru::Application.routes.draw do
 
-  resources :goals
-
-  resources :pledges
-
-  resources :pledge_types
-
-  resources :projects
-
-  resources :userdata
-
   # Logged in
   authenticated :user do
     
@@ -19,6 +9,12 @@ FollowThru::Application.routes.draw do
     match "/new" => "home#create_project", :as => :home_new
     match "/manage" => "home#manage_project", :as => :home_manage
     match "/all" => "home#index", :as => :home_all
+
+    # Dynamic ajax actions
+    resources :goals, :path => "ajax/goals"
+    resources :pledges, :path => "ajax/pledges"
+    resources :pledge_types, :path => "ajax/pledge_types"
+    resources :projects, :path => "ajax/projects"
   end
 
   # Not logged in? All you can see the homepage.

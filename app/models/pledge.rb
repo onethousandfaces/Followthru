@@ -7,4 +7,6 @@ class Pledge < ActiveRecord::Base
   has_one :pledge_type
 
   validates_with PledgeValidator, :fields => [ :amount ]
+  validates :userdatum, :presence => true
+  validates :pledge_type, :presence => true
 end

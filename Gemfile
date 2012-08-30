@@ -6,5 +6,6 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
   gem "bootstrap-sass", ">= 2.0.4.0"
 end
+gem "angularjs-rails"
 gem 'jquery-rails'
 gem "devise", ">= 2.1.2"

@@ -114,10 +114,7 @@ var DeleteProjectController = function($scope, Project) {
 DeleteProjectController.$inject = ['$scope', 'Project'];
 
 /** Controller for edit project form */
-var EditProjectController = function($scope, Project, PledgeType) {
-
-  $scope.valid = true;
-  $scope.project = new Project()
+var EditProjectController = function($scope, Project, PledgeType, Goal) {
 
   /** Reset the 'add pledge type' form */
   $scope.resetPledgeType = function() {
@@ -127,14 +124,20 @@ var EditProjectController = function($scope, Project, PledgeType) {
     $scope.pledgeTypeErrors = [];
   }
 
-  $scope.resetPledgeType();
+  /** Reset the 'add goal' form */
+  $scope.resetGoal = function() {
+    $scope.goal = new Goal();
+    $scope.goalSuccess = false;
+    $scope.goalHasErrors = false;
+    $scope.goalErrors = [];
+  }
 
   /** Add a pledge type */
   $scope.addPledgeType = function() {
     $scope.pledgeType.project_id = $scope.project.id;
     $scope.pledgeType.$create(function(data) {
       $scope.pledgeTypeHasErrors = false;
-      $scope.pledgeTypes.push($scope.pledgeType);
+      $scope.pledgeTypes.push(data);
       $scope.resetPledgeType();
       $scope.pledgeTypeSuccess = true;
     }, function(data) {
@@ -144,12 +147,42 @@ var EditProjectController = function($scope, Project, PledgeType) {
     });
   };
 
+  /** Add a goal */
+  $scope.addGoal = function() {
+    $scope.goal.project_id = $scope.project.id;
+    $scope.goal.$create(function(data) {
+      $scope.goalHasErrors = false;
+      $scope.goals.push(data);
+      $scope.resetPledgeType();
+      $scope.goalSuccess = true;
+    }, function(data) {
+      var data = appErrorsAsArray(data);
+      $scope.goalErrors = data;
+      $scope.goalHasErrors = data.length;
+    });
+  };
+
   /** Hide the success message */
   $scope.hidePledgeTypeSuccess = function() {
     $scope.pledgeTypeSuccess = false;
   }
 
-  /** Load basic data set */
+  /** Hide the success message */
+  $scope.hideGoalSuccess = function() {
+    $scope.goalSuccess = false;
+  }
+
+  /* Initial state */
+  $scope.valid = true;
+  $scope.project = new Project()
+  $scope.resetPledgeType();
+  $scope.resetGoal();
+  $scope.pledgeTypes = [];
+  $scope.pledgeTypesCount = 0;
+  $scope.goals = [];
+  $scope.goalsCount = 0;
+
+  /* Load basic data set */
   Project.get({id:EditProjectControllerData.id}, function(data) {
     for (var t in ProjectTypes) {
       if (data.status == ProjectTypes[t].key) {
@@ -159,13 +192,29 @@ var EditProjectController = function($scope, Project, PledgeType) {
     }
     $scope.project = data;
 
-    /* Fetch the goals and pledge types */
-    PledgeType.query({project_id:$scope.project.id}, function(data) {
-      $scope.pledgeTypes = data;
+    /* Fetch goals */
+    Goal.query({project_id:$scope.project.id}, function(data) {
+      $scope.goals = data;
+      $scope.goalsCount = data.length;
+    }, function(data) {
+      $scope.goals = []
+      $scope.goalsCount = 0;
+      $scope.goalsFetchError = data;
     });
+
+    /* Fetch pledge types */
+    PledgeType.pquery({project_id:$scope.project.id}, function(data) {
+      $scope.pledgeTypes = data;
+      $scope.pledgeTypesCount = data.length;
+    }, function(data) {
+      $scope.pledgeTypes = []
+      $scope.pledgeTypesCount = 0;
+      $scope.pledgeTypesFetchError = data;
+    });
+
   }, function() {
     $scope.valid = false;
   });
 }
 
-EditProjectController.$inject = ['$scope', 'Project', 'PledgeType'];
+EditProjectController.$inject = ['$scope', 'Project', 'PledgeType', 'Goal'];

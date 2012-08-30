@@ -55,7 +55,8 @@ class PledgeTypesController < ApplicationController
 
   # GET /pledge_types/1/edit
   def edit
-    @pledge_type = PledgeType.find(params[:id])
+    ud = UserDataFactory.new.get current_user, Userdatum
+    @pledge_type = PledgeType.where("userdatum_id = ? AND id = ?", ud.id, params[:id])
   end
 
   # POST /pledge_types

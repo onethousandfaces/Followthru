@@ -2,7 +2,12 @@ class GoalsController < ApplicationController
   # GET /goals
   # GET /goals.json
   def index
-    @goals = Goal.all
+    if params.has_key(:project_id) 
+      ud = UserDataFactory.new.get current_user, Userdatum
+      @goals = Goal.where("userdatum_id = ? AND project_id = ?", ud.id, params[:project])
+    else
+      @goals = Goal.where("userdatum_id = ?", ud.id)
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +18,8 @@ class GoalsController < ApplicationController
   # GET /goals/1
   # GET /goals/1.json
   def show
-    @goal = Goal.find(params[:id])
+    ud = UserDataFactory.new.get current_user, Userdatum
+    @goal = Goal.where("userdatum_id = ? AND id = ?", ud.id, params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -25,6 +31,7 @@ class GoalsController < ApplicationController
   # GET /goals/new.json
   def new
     @goal = Goal.new
+    @goal.userdatum = UserDataFactory.new.get current_user, Userdatum
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,13 +41,15 @@ class GoalsController < ApplicationController
 
   # GET /goals/1/edit
   def edit
-    @goal = Goal.find(params[:id])
+    ud = UserDataFactory.new.get current_user, Userdatum
+    @goal = Goal.where("userdatum_id = ? AND id = ?", ud.id, params[:id])
   end
 
   # POST /goals
   # POST /goals.json
   def create
     @goal = Goal.new(params[:goal])
+    @goal.userdatum = UserDataFactory.new.get current_user, Userdatum
 
     respond_to do |format|
       if @goal.save
@@ -56,7 +65,8 @@ class GoalsController < ApplicationController
   # PUT /goals/1
   # PUT /goals/1.json
   def update
-    @goal = Goal.find(params[:id])
+    ud = UserDataFactory.new.get current_user, Userdatum
+    @goal = Goal.where("userdatum_id = ? AND id = ?", ud.id, params[:id])
 
     respond_to do |format|
       if @goal.update_attributes(params[:goal])
@@ -72,7 +82,8 @@ class GoalsController < ApplicationController
   # DELETE /goals/1
   # DELETE /goals/1.json
   def destroy
-    @goal = Goal.find(params[:id])
+    ud = UserDataFactory.new.get current_user, Userdatum
+    @goal = Goal.where("userdatum_id = ? AND id = ?", ud.id, params[:id])
     @goal.destroy
 
     respond_to do |format|

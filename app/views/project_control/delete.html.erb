@@ -1,20 +1,30 @@
 <img src="/images/home_4.jpg" />
 
-<h1 class="introduction">Create a new project</h1>
+<h1 class="introduction">Delete project</h1>
 
-<h2>Tell us a bit about your project</h2>
+<script>
+  window.DeleteProjectControllerData = {
+    id : <%= @id %>
+  };
+</script>
 
-<div ng-controller="CreateProjectController">
-  <div>
-    Name; <input type="text" ng-model="project.name" value="Project name here">
+<div ng-controller="DeleteProjectController">
+
+  <div ng-show="valid && !done">
+    <h2>Are you sure you want to delete that? No going back... </h2>
+    <input type="button" ng-click="remove()" value="Yeah, really delete that"/>
   </div>
-  <div>
-    Image: <input type="text" ng-model="project.image" value="Image url here, if any">
+
+  <div ng-hide="valid">
+    That doesn't seem to be a valid project.
   </div>
-  <div>
-    Desc: <textarea ng-model="project.desc">Description here</textarea>
+
+  <div ng-show="error">
+    Looks like something went wrong! Sorry!
   </div>
-  <div>
-    <input type="button" ng-click="update()" value="Create this project"/>
+
+  <div ng-show="done">
+    Project destroyed.
   </div>
+
 </div>

@@ -20,8 +20,8 @@ FollowThru::Application.routes.draw do
 
     # Specific url patterns for editing items, etc.
     match "/project/view/:id" => "project_control#view", :as => :project_view
+    match "/project/delete/:id" => "project_control#delete", :as => :project_delete
     match "/project/edit" => "project_control#edit", :as => :project_edit
-    match "/project/delete" => "project_control#delete", :as => :project_delete
 
     # Dynamic ajax actions
     resources :goals, :path => "ajax/goals"

@@ -9,5 +9,6 @@ class ProjectControlController < ApplicationController
     @id = params[:id]
   end
   def delete
+    @id = params[:id]
   end
 end

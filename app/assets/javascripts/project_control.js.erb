@@ -85,3 +85,30 @@ var ViewProjectController = function($scope, Project) {
 }
 
 ViewProjectController.$inject = ['$scope', 'Project'];
+
+/** Controller for view project form */
+var DeleteProjectController = function($scope, Project) {
+
+  /* model */
+  $scope.error = false;
+  $scope.done = false;
+  $scope.valid = true;
+
+  /** Remove the object after all */
+  $scope.remove = function() {
+    $scope.target.$remove(function(data) {
+      $scope.done = true;
+    }, function(data) {
+      $scope.error = true;
+    });
+  };
+
+  /** Load the named target */
+  Project.get({id:DeleteProjectControllerData.id}, function(data) {
+    $scope.target = data;
+  }, function() {
+    $scope.valid = false;
+  });
+}
+
+DeleteProjectController.$inject = ['$scope', 'Project'];

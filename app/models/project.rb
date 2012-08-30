@@ -1,7 +1,7 @@
 class Project < ActiveRecord::Base
   attr_accessible :desc, :image, :name
 
-  belongs_to :userdata
+  belongs_to :userdatum
   has_many :pledge_types
   has_many :goals
 

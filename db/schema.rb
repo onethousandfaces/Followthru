@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120830154022) do
+ActiveRecord::Schema.define(:version => 20120830155850) do
 
   create_table "goals", :force => true do |t|
     t.integer  "project_id"
@@ -51,6 +51,8 @@ ActiveRecord::Schema.define(:version => 20120830154022) do
     t.datetime "updated_at",   :null => false
     t.string   "objective"
     t.boolean  "private"
+    t.integer  "status"
+    t.boolean  "open"
   end
 
   create_table "userdata", :force => true do |t|

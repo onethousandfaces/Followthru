@@ -18,6 +18,9 @@ class PledgeTest < ActiveSupport::TestCase
     p.userdatum = ud
     p.name = "Project"
     p.desc = "About project"
+    p.objective = "Do a thing"
+    p.status = Project::NEW
+    p.private = false
     assert p.valid?, "Invalid project: #{p.errors.messages}"
     p.save
 

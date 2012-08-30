@@ -27,7 +27,8 @@ body {
 		padding-right: 10px;
 	}
 	.nav {
-		margin-left: 25px;
+		margin-left: 0px;
+		padding-left: 15px;
 		li {
 			font-family: 'Source Sans Pro', "Helvetica Neue", Helvetica, Arial, sans-serif;
 			font-size: 18px;
@@ -65,7 +66,7 @@ h2 {
 	color: #ff9435;
 }
 
-p, ul, ol, table, form {
+.content p, ul, ol, table, form {
 	padding-left: 30px;
 	padding-right: 30px;
 }
@@ -74,5 +75,17 @@ table.projects {
 	border-collapse: collapse;
 	td {
 		border-top: dashed 1px #333;
+	}
+}
+
+footer {
+	padding-top: 60px;
+	.container {
+		border-top: solid 1px #eee;
+		padding-top: 20px;
+		p {
+			padding-left: 30px;
+			padding-right: 30px;
+		}
 	}
 }

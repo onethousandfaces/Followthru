@@ -11,7 +11,48 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120830035703) do
+ActiveRecord::Schema.define(:version => 20120830052444) do
+
+  create_table "goals", :force => true do |t|
+    t.integer  "project_id"
+    t.integer  "pledgetype_id"
+    t.decimal  "total"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.integer  "instances"
+  end
+
+  create_table "pledge_types", :force => true do |t|
+    t.integer  "project_id"
+    t.string   "name"
+    t.string   "desc"
+    t.string   "image"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "pledges", :force => true do |t|
+    t.integer  "userdata_id"
+    t.integer  "pledgetype_id"
+    t.decimal  "amount"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  create_table "projects", :force => true do |t|
+    t.integer  "userdata_id"
+    t.string   "name"
+    t.string   "desc"
+    t.string   "image"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "userdata", :force => true do |t|
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

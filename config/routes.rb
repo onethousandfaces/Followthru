@@ -1,5 +1,15 @@
 FollowThru::Application.routes.draw do
 
+  resources :goals
+
+  resources :pledges
+
+  resources :pledge_types
+
+  resources :projects
+
+  resources :userdata
+
   # Logged in
   authenticated :user do
     

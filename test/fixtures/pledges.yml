@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  userdata_id: MyString
+  pledgetype_id: MyString
+  amount: MyString
+
+two:
+  userdata_id: MyString
+  pledgetype_id: MyString
+  amount: MyString

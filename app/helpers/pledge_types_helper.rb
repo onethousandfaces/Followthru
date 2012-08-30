@@ -1,0 +1,2 @@
+module PledgeTypesHelper
+end

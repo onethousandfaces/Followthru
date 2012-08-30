@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Project:</b>
+  <%= @pledge_type.project_id %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @pledge_type.name %>
+</p>
+
+<p>
+  <b>Desc:</b>
+  <%= @pledge_type.desc %>
+</p>
+
+<p>
+  <b>Image:</b>
+  <%= @pledge_type.image %>
+</p>
+
+
+<%= link_to 'Edit', edit_pledge_type_path(@pledge_type) %> |
+<%= link_to 'Back', pledge_types_path %>

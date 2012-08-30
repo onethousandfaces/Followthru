@@ -1,0 +1,27 @@
+<h1>Listing goals</h1>
+
+<table>
+  <tr>
+    <th>Project</th>
+    <th>Pledgetype</th>
+    <th>Total</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @goals.each do |goal| %>
+  <tr>
+    <td><%= goal.project_id %></td>
+    <td><%= goal.pledgetype_id %></td>
+    <td><%= goal.total %></td>
+    <td><%= link_to 'Show', goal %></td>
+    <td><%= link_to 'Edit', edit_goal_path(goal) %></td>
+    <td><%= link_to 'Destroy', goal, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Goal', new_goal_path %>

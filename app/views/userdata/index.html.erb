@@ -1,0 +1,23 @@
+<h1>Listing userdata</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @userdata.each do |userdatum| %>
+  <tr>
+    <td><%= userdatum.user_id %></td>
+    <td><%= link_to 'Show', userdatum %></td>
+    <td><%= link_to 'Edit', edit_userdatum_path(userdatum) %></td>
+    <td><%= link_to 'Destroy', userdatum, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Userdatum', new_userdatum_path %>

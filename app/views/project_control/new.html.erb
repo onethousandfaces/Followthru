@@ -21,14 +21,14 @@
   <div ng-hide="success">
   
   	<div class="control-group">
-		<label for="project_name" class="control-label">Name</label>
+		<label for="project_name" class="control-label">Project name</label>
 		<div class="controls">
 			<input type="text" ng-model="project.name" name="project_name" />
 		</div>
 	</div>
 	
 	<div class="control-group">
-		<label for="desc" class="control-label">Describe your project</label>
+		<label for="desc" class="control-label">Short description</label>
 		<div class="controls">
 			<textarea ng-model="project.desc" rows="4"></textarea>
 		</div>
@@ -38,6 +38,28 @@
 		<label for="image" class="control-label">Project avatar</label>
 		<div class="controls">
 			<input type="file" ng-model="project.image" name="image" />		
+		</div>
+	</div>
+
+	<div class="control-group">
+		<label for="project_type" class="control-label">What is your objective?</label>
+		<div class="controls">
+			<select name="project_type">
+				<option>I am getting something and want to see if others would like some too.</option>
+				<option>I will arrange something if enough people are interested.</option>
+				<option>I am organising a gift and wish to let people contribute.</option>
+				<option>I have an idea and would like people support me.</option>
+			</select>
+		</div>
+	</div>
+	
+	<div class="control-group">
+		<div class="controls">
+			<label class="checkbox">
+				<input type="checkbox" value="" checked>
+				This project is open to everyone.
+				<p><small>Unticking this box means only people who have the link will be able to find your project.</small></p>
+			</label>
 		</div>
 	</div>
 

@@ -67,19 +67,39 @@ h2 {
 }
 
 .content {
+	p, ul, ol, form {
+		padding-left: 30px;
+		padding-right: 30px;
+	}
 	.container-inner {
 		width: 1110px;
-	}
-	table.table {
 		margin-left: 30px;
-		margin-right: 30px;
+		overflow: auto;
+		.col3 {
+			width: 360px;
+			float: left;
+			p {
+				padding-left: 0px;
+				padding-right: 0px;
+			}
+		}
+		.col3-left {
+			margin-right: 15px;
+		}
+		.col3-right {
+			margin-left: 15px;
+		}
+	}
+	label {
+		p {
+			padding-left: 0px;
+			padding-right: 0px;
+		}
 	}
 }
 
-.icon {
-	display: block;
-	width: 14px;
-	height: 14px;
+select {
+	width: auto;
 }
 
 footer {

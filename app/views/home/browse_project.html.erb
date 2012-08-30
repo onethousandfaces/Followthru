@@ -2,5 +2,29 @@
 
 <h1 class="introduction">Browse all public projects</h1>
 
-<h2>Tell us a bit about your project</h2>
+<div ng-controller="ListProjectController">
+  <h2>There are <strong ng-model="projectCount">{{ projectCount }}</strong> public projects</h2>
 
+	<div class="container-inner">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Image</th>
+					<th>Name</th>
+					<th>Desc</th>
+				</tr>
+			</thead>
+			
+			<tbody>
+				<tr ng-repeat="project in projects">
+					<td>{{project.id}} {{project.image}}</td>
+					<td>{{project.name}}</td>
+					<td>{{project.desc}}</td>
+				</tr>
+			</tbody>
+		
+		</table>
+
+	</div>
+
+</div>

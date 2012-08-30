@@ -2,11 +2,10 @@
 
 <h1 class="introduction">Manage my projects</h1>
 
-<div class="container-inner">
-
 <div ng-controller="ListProjectController">
   <h2>You have <strong ng-model="projectCount">{{ projectCount }}</strong> open projects</h2>
 
+	<div class="container-inner">
 		<table class="table">
 			<thead>
 				<tr>
@@ -18,27 +17,71 @@
 					<th></th>
 				</tr>
 			</thead>
-			
 			<tbody>
 				<tr ng-repeat="project in projects">
-					<td>{{project.image}}</td>
+					<td>{{project.id}} {{project.image}}</td>
 					<td>{{project.name}}</td>
 					<td>{{project.desc}}</td>
-					<td><i class="icon icon-eye-open" /> <small>Show</small></td>
-					<td><i class="icon icon-edit" /> <small>Edit</small></td>
-					<td><i class="icon icon-trash" /> <small>Delete forever</small></td>
+					<td><i class="icon-eye-open"></i> Show</td>
+					<td><i class="icon-edit"></i> Edit</small></td>
+					<td><i class="icon-trash"></i> Delete forever</td>
 				</tr>
 			</tbody>
-		
 		</table>
+	</div>
 
   <h2>Successful projects</h2>
 
-  <p>PROJECTS THAT MET THE TARGET</p>
+	<div class="container-inner">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Image</th>
+					<th>Name</th>
+					<th>Desc</th>
+					<th></th>
+					<th></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="project in projects">
+					<td>{{project.id}} {{project.image}}</td>
+					<td>{{project.name}}</td>
+					<td>{{project.desc}}</td>
+					<td><i class="icon-book"></i> Track pledges</td>
+					<td><i class="icon-refresh"></i> Recycle project</small></td>
+					<td><i class="icon-trash"></i> Delete forever</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 
   <h2>Shelved projects</h2>
 
-  <p>PROJECTS THAT DIDN'T MEET THE TARGET</p>
+	<div class="container-inner">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Image</th>
+					<th>Name</th>
+					<th>Desc</th>
+					<th></th>
+					<th></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="project in projects">
+					<td>{{project.id}} {{project.image}}</td>
+					<td>{{project.name}}</td>
+					<td>{{project.desc}}</td>
+					<td><i class="icon-eye-open"></i> View</td>
+					<td><i class="icon-refresh"></i> Recycle project</small></td>
+					<td><i class="icon-trash"></i> Delete forever</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 
-</div>
 </div>

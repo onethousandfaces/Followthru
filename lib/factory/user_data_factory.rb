@@ -3,7 +3,7 @@ class UserDataFactory
     if type.where("user_id = ?", [current_user.id]).count == 0
       ud = type.new
       ud.user = current_user
-      us.save
+      ud.save
     end
     ud = type.where("user_id = ?", [current_user.id]).first
     return ud

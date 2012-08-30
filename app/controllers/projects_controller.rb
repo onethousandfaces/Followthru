@@ -48,7 +48,7 @@ class ProjectsController < ApplicationController
     ud = UserDataFactory.new.get current_user, Userdatum
     @project = Project.new(params[:project])
     @project.userdatum = ud
-    @project.open = true
+    @project.status = Project::NEW
 
     respond_to do |format|
       if @project.save

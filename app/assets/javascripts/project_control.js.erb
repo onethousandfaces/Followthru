@@ -22,18 +22,37 @@ CreateProjectController.$inject = ['$scope', 'Project'];
 
 /** Controller for list project form */
 var ListProjectController = function($scope, Project) {
-  $scope.projects = [];
-  $scope.projectCount = 0;
   $scope.nav = function(url) { document.location = url; }
+  $scope.projects = {
+    'new' : {items : [], count : 0 },
+    'active' : {items : [], count : 0 },
+    'success' : {items : [], count : 0 },
+    'failed' : {items : [], count : 0 },
+    'closed' : {items : [], count : 0 }
+  };
 
   Project.query(function(data) {
     for (var d in data) {
+
+      /* update urls for each item */
       data[d].viewUrl = ListProjectControllerData.baseViewUrl + "/" + data[d].id;
       data[d].editUrl = ListProjectControllerData.baseEditUrl + "/" + data[d].id;
       data[d].deleteUrl = ListProjectControllerData.baseDeleteUrl + "/" + data[d].id;
+
+      /* split into status batches */
+      if (data[d].status == 0) $scope.projects.new.items.push(data[d])
+      else if (data[d].status == 1) $scope.projects.active.items.push(data[d])
+      else if (data[d].status == 2) $scope.projects.success.items.push(data[d])
+      else if (data[d].status == 3) $scope.projects.failed.items.push(data[d])
+      else if (data[d].status == 4) $scope.projects.closed.items.push(data[d])
     }
-    $scope.projects = data;
-    $scope.projectCount = $scope.projects.length;
+
+    /* update project counts */
+    $scope.projects.new.items.count = $scope.projects.new.items.length;
+    $scope.projects.active.items.count = $scope.projects.active.items.length;
+    $scope.projects.success.items.count = $scope.projects.success.items.length;
+    $scope.projects.failed.items.count = $scope.projects.failed.items.length;
+    $scope.projects.closed.items.count = $scope.projects.closed.items.length;
   });
 }
 

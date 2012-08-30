@@ -6,7 +6,7 @@ FollowThru::Application.routes.draw do
     # Basic site layout!
     root :to => 'home#index'
     match "/about" => "home#about", :as => :home_about
-	  match "/browse" => "home#browse_project", :as => :home_browse
+	match "/browse" => "home#browse_project", :as => :home_browse
     match "/manage" => "home#manage_project", :as => :home_manage
     match "/all" => "home#index", :as => :home_all
     match "/new" => "home#create_project", :as => :home_new

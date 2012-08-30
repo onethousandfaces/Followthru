@@ -2,29 +2,35 @@
 
 <h1 class="introduction">Manage my projects</h1>
 
+<div class="container-inner">
+
 <div ng-controller="ListProjectController">
-  <p>You have <strong ng-model="projectCount">{{ projectCount }}</strong> projects open:</p>
+  <h2>You have <strong ng-model="projectCount">{{ projectCount }}</strong> open projects</h2>
 
-  <table class="projects">
-    <tr>
-      <th>Image</th>
-      <th>Name</th>
-      <th>Desc</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-
-    <tr ng-repeat="project in projects">
-      <td>{{project.image}}</td>
-      <td>{{project.name}}</td>
-      <td>{{project.desc}}</td>
-      <td>Show</td>
-      <td>Edit</td>
-      <td>Delete forever</td>
-    </tr>
-
-  </table>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Image</th>
+					<th>Name</th>
+					<th>Desc</th>
+					<th></th>
+					<th></th>
+					<th></th>
+				</tr>
+			</thead>
+			
+			<tbody>
+				<tr ng-repeat="project in projects">
+					<td>{{project.image}}</td>
+					<td>{{project.name}}</td>
+					<td>{{project.desc}}</td>
+					<td><i class="icon icon-eye-open" /> <small>Show</small></td>
+					<td><i class="icon icon-edit" /> <small>Edit</small></td>
+					<td><i class="icon icon-trash" /> <small>Delete forever</small></td>
+				</tr>
+			</tbody>
+		
+		</table>
 
   <h2>Successful projects</h2>
 
@@ -33,4 +39,6 @@
   <h2>Shelved projects</h2>
 
   <p>PROJECTS THAT DIDN'T MEET THE TARGET</p>
+
+</div>
 </div>

@@ -2,8 +2,9 @@
 
 <h1 class="introduction">Create a new project</h1>
 
-<h2>Tell us a bit about your project</h2>
+<h2>Tell us a bit about your project to get started</h2>
 
+<form class="form-horizontal">
 <div ng-controller="CreateProjectController">
   <div ng-show="hasErrors">
     Errors:
@@ -16,16 +17,38 @@
   <div ng-show="success">
     Success! <a href="/project/list">Click here to view your new project</a>
   </div>
+
   <div ng-hide="success">
-    Name: <input type="text" ng-model="project.name"/>
+  
+  	<div class="control-group">
+		<label for="project_name" class="control-label">Name</label>
+		<div class="controls">
+			<input type="text" ng-model="project.name" name="project_name" />
+		</div>
+	</div>
+	
+	<div class="control-group">
+		<label for="desc" class="control-label">Describe your project</label>
+		<div class="controls">
+			<textarea ng-model="project.desc" rows="4"></textarea>
+		</div>
+	</div>
+	
+	<div class="control-group">
+		<label for="image" class="control-label">Project avatar</label>
+		<div class="controls">
+			<input type="file" ng-model="project.image" name="image" />		
+		</div>
+	</div>
+
+	<div class="control-group">
+		<div class="controls">
+    		<button class="btn btn-success" ng-click="create()" type="button">Create this project</button>
+		</div>
+	</div>
+
   </div>
-  <div>
-    Image: <input type="text" ng-model="project.image"/>
-  </div>
-  <div>
-    Desc: <textarea ng-model="project.desc"></textarea>
-  </div>
-  <div>
-    <input type="button" ng-click="create()" value="Create this project"/>
-  </div>
+
+
 </div>
+</form>

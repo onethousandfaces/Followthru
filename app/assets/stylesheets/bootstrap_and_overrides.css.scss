@@ -48,6 +48,7 @@ h1 {
 	font-weight: 700;
 	font-size: 26px;
 	line-height: 35px;
+	-webkit-font-smoothing: antialiased;
 	&.introduction {
 		margin-top: -50px;
 		margin-bottom: 50px;

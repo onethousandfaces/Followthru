@@ -4,6 +4,11 @@
 
 <h2>Tell us a bit about your project</h2>
 
+<div ng-controller="CreateProjectController">
+  <div>
+    <input type="text">
+  </div>
+
 <p>PROJECT NAME</p>
 
 <p>PROJECT DESCRIPTION</p>
@@ -17,3 +22,8 @@
 <h2>Configure the options for your project</h2>
 
 <p>SOME KIND OF FORM STUFF (DEPENDING ON PROJECT TYPE?)</p>
+
+  <div>
+    <input type="button" ng-click="update()" value="Create this project"/>
+  </div>
+</div>

@@ -33,4 +33,4 @@ module.config(["$httpProvider", function(provider) {
       'save' : { method: 'PUT' },
     });
   });
-});
+})();

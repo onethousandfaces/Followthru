@@ -1,3 +1,12 @@
+/** Project type keys */
+var ProjectTypes = {
+  'new' : { key : 0, items : [], count : 0 },
+  'active' : { key : 1, items : [], count : 0 },
+  'success' : { key : 2, items : [], count : 0 },
+  'failed' : { key : 3, items : [], count : 0 },
+  'closed' : { key : 4, items : [], count : 0 }
+};
+
 /** Controller for new project form */
 var CreateProjectController = function($scope, Project) {
   $scope.project = new Project();
@@ -30,13 +39,7 @@ CreateProjectController.$inject = ['$scope', 'Project'];
 /** Controller for list project form */
 var ListProjectController = function($scope, Project) {
   $scope.nav = function(url) { document.location = url; }
-  $scope.projects = {
-    'new' : { key : 0, items : [], count : 0 },
-    'active' : { key : 1, items : [], count : 0 },
-    'success' : { key : 2, items : [], count : 0 },
-    'failed' : { key : 3, items : [], count : 0 },
-    'closed' : { key : 4, items : [], count : 0 }
-  };
+  $scope.projects = ProjectTypes;
 
   Project.query(function(data) {
     for (var d in data) {
@@ -66,11 +69,18 @@ ListProjectController.$inject = ['$scope', 'Project'];
 
 /** Controller for view project form */
 var ViewProjectController = function($scope, Project) {
+  $scope.valid = true;
   $scope.project = new Project()
   Project.get({id:ViewProjectControllerData.id}, function(data) {
+    for (var t in ProjectTypes) {
+      if (data.status == ProjectTypes[t].key) {
+        data.status = t;
+        break;
+      }
+    }
     $scope.project = data;
   }, function() {
-    alert("Bad id");
+    $scope.valid = false;
   });
 }
 

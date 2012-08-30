@@ -11,11 +11,16 @@ FollowThru::Application.routes.draw do
     match "/all" => "home#index", :as => :home_all
     match "/new" => "home#create_project", :as => :home_new
 
-    # For managing projects
-    match "/project/edit" => "project_control#edit", :as => :project_edit
+    # For managing projects, base urls
     match "/project/new" => "project_control#new", :as => :project_new
-    match "/project/view/:id" => "project_control#view", :as => :project_view
     match "/project/list" => "project_control#list", :as => :project_list
+    match "/project/view" => "project_control#view", :as => :project_view_base
+    match "/project/edit" => "project_control#edit", :as => :project_edit_base
+    match "/project/delete" => "project_control#delete", :as => :project_delete_base
+
+    # Specific url patterns for editing items, etc.
+    match "/project/view/:id" => "project_control#view", :as => :project_view
+    match "/project/edit" => "project_control#edit", :as => :project_edit
     match "/project/delete" => "project_control#delete", :as => :project_delete
 
     # Dynamic ajax actions

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120830094922) do
+ActiveRecord::Schema.define(:version => 20120830154022) do
 
   create_table "goals", :force => true do |t|
     t.integer  "project_id"
@@ -36,10 +36,10 @@ ActiveRecord::Schema.define(:version => 20120830094922) do
 
   create_table "pledges", :force => true do |t|
     t.integer  "userdatum_id"
-    t.integer  "pledge_type_id"
+    t.integer  "pledge_id"
     t.decimal  "amount"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "projects", :force => true do |t|
@@ -49,6 +49,8 @@ ActiveRecord::Schema.define(:version => 20120830094922) do
     t.string   "image"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+    t.string   "objective"
+    t.boolean  "private"
   end
 
   create_table "userdata", :force => true do |t|

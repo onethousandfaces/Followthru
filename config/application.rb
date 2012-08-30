@@ -63,5 +63,6 @@ module FollowThru
 
     # Load validators
     config.autoload_paths += %W(#{config.root}/lib/validators/)
+    config.autoload_paths += %W(#{config.root}/lib/factory/)
   end
 end

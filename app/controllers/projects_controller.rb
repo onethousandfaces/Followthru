@@ -40,7 +40,11 @@ class ProjectsController < ApplicationController
   # POST /projects
   # POST /projects.json
   def create
+
+    # Get the userdata for this user
+    ud = UserDataFactory.new.get current_user, Userdatum
     @project = Project.new(params[:project])
+    @project.userdatum = ud
 
     respond_to do |format|
       if @project.save

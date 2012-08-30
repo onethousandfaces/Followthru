@@ -1,20 +1,36 @@
-<img src="/images/home_4.jpg" />
+<img src="/images/home_2.jpg" />
 
-<h1 class="introduction">Create a new project</h1>
+<h1 class="introduction">Manage my projects</h1>
 
-<h2>Tell us a bit about your project</h2>
+<div ng-controller="ListProjectController">
+  <p>You have <strong>{{ projectCount }}</strong> projects open:</p>
 
-<div ng-controller="CreateProjectController">
-  <div>
-    Name; <input type="text" ng-model="project.name" value="Project name here">
-  </div>
-  <div>
-    Image: <input type="text" ng-model="project.image" value="Image url here, if any">
-  </div>
-  <div>
-    Desc: <textarea ng-model="project.desc">Description here</textarea>
-  </div>
-  <div>
-    <input type="button" ng-click="update()" value="Create this project"/>
-  </div>
+  <table class="projects">
+    <tr>
+      <th>Image</th>
+      <th>Name</th>
+      <th>Desc</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+
+    <tr ng-repeat="project in projects">
+      <td>{{project.image}}</td>
+      <td>{{project.name}}</td>
+      <td>{{project.desc}}</td>
+      <td>Show</td>
+      <td>Edit</td>
+      <td>Delete forever</td>
+    </tr>
+
+  </table>
+
+  <h2>Successful projects</h2>
+
+  <p>PROJECTS THAT MET THE TARGET</p>
+
+  <h2>Shelved projects</h2>
+
+  <p>PROJECTS THAT DIDN'T MEET THE TARGET</p>
 </div>

@@ -1,0 +1,28 @@
+<img src="/images/home_4.jpg" />
+
+<h1 class="introduction">Create a new project</h1>
+
+<h2>Tell us a bit about your project</h2>
+
+<div ng-controller="CreateProjectController">
+  <div ng-show="hasErrors">
+    Errors:
+    <ul>
+      <li ng-repeat="error in errors">
+        <div> {{error.field}} -- {{error.error}} </div>
+      </li>
+    </ul>
+  </div>
+  <div>
+    Name: <input type="text" ng-model="project.name"/>
+  </div>
+  <div>
+    Image: <input type="text" ng-model="project.image"/>
+  </div>
+  <div>
+    Desc: <textarea ng-model="project.desc"></textarea>
+  </div>
+  <div>
+    <input type="button" ng-click="create()" value="Create this project"/>
+  </div>
+</div>

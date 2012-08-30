@@ -8,6 +8,7 @@ class HomeController < ApplicationController
   end
 
   def create_project
+    redirect_to project_new_path
   end
 
   def manage_project

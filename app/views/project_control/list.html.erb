@@ -3,7 +3,7 @@
 <h1 class="introduction">Manage my projects</h1>
 
 <div ng-controller="ListProjectController">
-  <p>You have <strong>{{ projectCount }}</strong> projects open:</p>
+  <p>You have <strong ng-model="projectCount">{{ projectCount }}</strong> projects open:</p>
 
   <table class="projects">
     <tr>

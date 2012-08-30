@@ -26,7 +26,7 @@ var ListProjectController = function($scope, Project) {
   $scope.projectCount = 0;
   Project.query(function(data) {
     $scope.projects = data;
-    $scope.projectCount = projects.length;
+    $scope.projectCount = $scope.projects.length;
   });
 }
 

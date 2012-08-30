@@ -12,6 +12,7 @@ class HomeController < ApplicationController
   end
 
   def manage_project
+    redirect_to project_list_path
   end
 
   def about

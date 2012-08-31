@@ -23,7 +23,7 @@
 		<table class="table">
 			<thead>
 				<tr>
-					<th>Image</th>
+					<th></th>
 					<th>Status</th>
 					<th>Name</th>
 					<th>Desc</th>
@@ -36,7 +36,7 @@
 			</thead>
 			<tbody>
 				<tr ng-repeat="project in projects.new.items">
-					<td>{{project.id}} {{project.image}}</td>
+					<td><img src="http://placekitten.com/50/50/" /><!-- {{project.id}} {{project.image}} --></td>
 					<td>{{project.status}}</td>
 					<td><a href="{{project.viewUrl}}">{{project.name}}</a></td>
 					<td>{{project.desc}}</td>

@@ -11,22 +11,13 @@
     This doesn't seem to be a valid project.
   </div>
 
-  <div ng-show="valid">
-    <h1 class="introduction">{{project.name}}</h1>
-    <div>
-      Image: {{project.image}}
-    </div>
-    <div>
-      Desc: {{project.desc}}
-    </div>
-    <div>
-      Status: {{project.status}}
-    </div>
-    <div>
-      Objective: {{project.objective}}
-    </div>
-    <div>
-      Private: {{project.private}}
-    </div>
-  </div>
+	<div ng-show="valid">
+
+		<h1>{{project.name}}</h1>
+		
+		<p class="lead-first">{{project.desc}}</p>
+  
+
+	</div><!-- end of show valid -->
+
 </div>

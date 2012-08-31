@@ -96,6 +96,9 @@ h2 {
 			padding-right: 0px;
 		}
 	}
+	p.lead-first:first-line {
+		font-weight: 200;
+	}
 }
 
 select {

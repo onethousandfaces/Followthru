@@ -86,13 +86,13 @@ var ViewProjectController = function($scope, Project, PledgeType, Pledge) {
     $scope.project = data;
 
     /* Get pledge types for this project */
-    PledgeType.get({project_id:$scope.project.id}, function(data) {
+    PledgeType.query({project_id:$scope.project.id}, function(data) {
       $scope.pledgeTypes = data;
       $scope.pledgeTypeCount = data.length;
     });
 
     /* Get any pledges made by you for this project */
-    Pledge.get({project_id:$scope.project.id}, function(data) {
+    Pledge.query({project_id:$scope.project.id}, function(data) {
       $scope.myPledges = data;
     });
   }, function() {

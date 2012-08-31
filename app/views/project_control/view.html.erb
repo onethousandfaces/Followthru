@@ -13,7 +13,7 @@
 
 		<h1>{{project.name}}</h1>
 		
-		<p><small>USERNAME || SOME HUMAN-FRIENDLY WORDING TO DESCRIBE THE PROJECT OBJECTIVE {{project.objective}}.</small></p>
+		<p><small><%= current_user.name %> || {{project.objective}}</small></p>
 
 		<div class="container-inner">		
 		<div class="col3 col3-doubleleft">
@@ -30,18 +30,41 @@
 				No pledge types for this project.
 			  </div>
 		
-			  <div ng-show="pledgeTypeCount"> 
-				Pledges:
-				<div ng-repeat="item in pledgeTypes">
-				  ${{item.amount}} - {{item.name}} - {{item.desc}}
-				</div>
+        <style>
+          .pledge-type {
+            border: 1px solid #333;
+            background: #efefef;
+            border-radius: 8px;
+            padding: 4px;
+            margin: 10px;
+            width: 300px;
+            display: inline-block;
+          }
+          .pledge-type img {
+            float: left;
+            margin: 3px;
+          }
+          .pledge-type .info {
+            margin-left: 96px;
+            margin-top: 8px;
+          }
+        </style>
+
+			  <div ng-show="pledgeTypeCount" class="pledge-type-container"> 
+          <div ng-repeat="item in pledgeTypes" class="pledge-type">
+            <img src="http://placekitten.com/82/50"> 
+            <div class="info">
+              <b>${{item.amount}}0</b> - {{item.name}} <br/>
+              {{item.desc}}
+            </div>
+          </div>
 			  </div>
 				
 			  <div ng-hide="myPledgeCount">
 				You have not pledged to this project
 			  </div>
 
-			  <div ng-show="myPledgeCount"> 
+			  <!--<div ng-show="myPledgeCount"> 
 				Your pledges:
 				<div ng-repeat="item in myPledges">
 				  ${{item.amount}} - {{item.pledge_type_id}}
@@ -51,10 +74,10 @@
 			  <div ng-show="pledgeFailed">
 				<ul>
 				  <li ng-repeat="item in pledgeErrors">
-					{{ item.field }} -- {{ item.error }}
+					{{ item.field }} {{ item.error }}
 				  </li>
 				</ul>
-			  </div>
+			  </div> -->
 			  
 			  <h3>Add a pledge</h3>
 			  

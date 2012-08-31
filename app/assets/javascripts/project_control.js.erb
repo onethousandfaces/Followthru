@@ -106,6 +106,15 @@ var ViewProjectController = function($scope, Project, PledgeType, Pledge, Goal) 
     }
     $scope.project = data;
 
+    /* Process the objective into some kind of thing */
+    var type = $scope.project.objective;
+    if (type == "Gift") 
+      $scope.project.objective = "doug is collecting money for FAKEGRIMLOCKS farewell present! join in!";
+    else if (type == "Shopping") 
+      $scope.project.objective = "doug is going to go and get some icecream, and wants to know if anyone else wants in...";
+    else 
+      $scope.project.objective = "doug has a crazy idea. good work doug.";
+
     /* Get pledge types for this project */
     PledgeType.query({project_id:$scope.project.id}, function(data) {
       $scope.pledgeTypes = data;

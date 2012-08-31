@@ -13,24 +13,28 @@
 
 		<h1>{{project.name}}</h1>
 		
-		<p>by USERNAME</p>
+		<p><small>USERNAME || SOME HUMAN-FRIENDLY WORDING TO DESCRIBE THE PROJECT OBJECTIVE {{project.objective}}.</small></p>
 
 		<div class="container-inner">		
 		<div class="col3 col3-doubleleft">
 		
-			<img src="http://placekitten.com/550/300" />
+			<img src="http://placekitten.com/720/300" class="project-image" />
 
 			<p class="lead-first">{{project.desc}}</p>
+			
+			<p>PROJECT MENU OPTIONS, PLEDGING, ETC. GOES HERE</p>
 		
 			<!-- <img src="{{project.image}}" /> -->
 			
 		</div>
 		
-		<div class="col3 col3-right">
+		<div class="col3 col3-right breakout-box">
+		
+			<p>PLEDGE PROGRESS STUFF GOES HERE</p>
 		
 			<p>Status: {{project.status}}</p>
-			<p>Objective: {{project.objective}}</p>
-			<p>Private: {{project.private}}</p>
+			
+			<p>This is a PRIVATE/PUBLIC project. {{project.private}}</p>
 
 		</div>
 		</div>

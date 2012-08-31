@@ -71,9 +71,29 @@ ListProjectController.$inject = ['$scope', 'Project', 'PledgeType', 'Pledge'];
 var ViewProjectController = function($scope, Project, PledgeType, Pledge) {
   $scope.valid = true;
   $scope.project = new Project();
-  $scope.pledge = new Pledge();
   $scope.pledgeTypes = [];
   $scope.pledgeTypeCount = 0;
+  $scope.myPledges = [];
+  $scope.myPledgeCount = 0;
+  $scope.pledge = new Pledge();
+  $scope.pledgeSuccess = false;
+  $scope.pledgeFailed = false;
+  $scope.pledgeErrors = [];
+
+  /* Add a pledge to this project */
+  $scope.addPledge = function() {
+    $scope.pledge.$create(function(data) {
+      $scope.myPledges.push(data);
+      $scope.myPledgeCount += 1;
+      $scope.pledge = new Pledge();
+      $scope.pledgeSuccess = true;
+      $scope.pledgeFailed = false;
+    }, function() {
+      var data = appErrorsAsArray(data);
+      $scope.pledgeFailed = data.length > 0;
+      $scope.pledgeErrors = data;
+    });
+  };
 
   /** Load project info */
   Project.get({id:ViewProjectControllerData.id}, function(data) {
@@ -94,6 +114,7 @@ var ViewProjectController = function($scope, Project, PledgeType, Pledge) {
     /* Get any pledges made by you for this project */
     Pledge.query({project_id:$scope.project.id}, function(data) {
       $scope.myPledges = data;
+      $scope.myPledgeCount = data.length;
     });
   }, function() {
     $scope.valid = false;

@@ -35,6 +35,34 @@
         </div>
       </div>
 		
+      <div ng-hide="myPledgeCount">
+        You have not pledge to this project
+      </div>
+
+      <div ng-show="myPledgeCount"> 
+        Your pledges:
+        <div ng-repeat="item in myPledges">
+          ${{item.amount}} - {{item.pledge_type_id}}
+        </div>
+      </div>
+		
+      <div ng-show="pledgeFailed">
+        <ul>
+          <li ng-repeat="item in pledgeErrors">
+            {{ item.field }} -- {{ item.error }}
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <b>Add a pledge</b><br/>
+        Amount: <input type="text" ng-model="pledge.amount"/><br/>
+        <select ng-model="pledge.pledge_type_id">
+          <option ng-repeat="item in pledgeTypes" value="{{item.id}}">{{item.name}}</option>
+        </select><br/>
+        <button ng-click="addPledge()">Pledge to this project</button>
+      </div>
+
 			<!-- <img src="{{project.image}}" /> -->
 			
 		</div>
@@ -48,7 +76,8 @@
 			<p>This is a PRIVATE/PUBLIC project. {{project.private}}</p>
 
 		</div>
-		</div>
+
+  </div>
   
 
 	</div><!-- end of show valid -->

@@ -172,6 +172,22 @@ var EditProjectController = function($scope, Project, PledgeType, Goal) {
     $scope.goalSuccess = false;
   }
 
+  $scope.makeProjectLive = function() {
+    if ($scope.isNewProject) {
+      $scope.project.status = 2;
+      $scope.project.$save(function(data) {
+        for (var t in ProjectTypes) {
+          if (data.status == ProjectTypes[t].key) {
+            data.status = t;
+            break;
+          }
+        }
+        $scope.project = data;
+        $scope.isNewProject = false;
+      });
+    }
+  }
+
   /* Initial state */
   $scope.valid = true;
   $scope.project = new Project()
@@ -181,6 +197,7 @@ var EditProjectController = function($scope, Project, PledgeType, Goal) {
   $scope.pledgeTypesCount = 0;
   $scope.goals = [];
   $scope.goalsCount = 0;
+  $scope.isNewProject = false;
 
   /* Load basic data set */
   Project.get({id:EditProjectControllerData.id}, function(data) {
@@ -191,6 +208,7 @@ var EditProjectController = function($scope, Project, PledgeType, Goal) {
       }
     }
     $scope.project = data;
+    $scope.isNewProject = data.status == 0;
 
     /* Fetch goals */
     Goal.query({project_id:$scope.project.id}, function(data) {

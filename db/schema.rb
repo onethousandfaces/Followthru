@@ -11,14 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120830155850) do
+ActiveRecord::Schema.define(:version => 20120831014829) do
 
   create_table "goals", :force => true do |t|
     t.integer  "project_id"
-    t.integer  "pledgetype_id"
+    t.integer  "pledge_type_id"
     t.decimal  "total"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
     t.integer  "instances"
     t.integer  "userdatum_id"
   end

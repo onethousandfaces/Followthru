@@ -45,6 +45,7 @@ class PledgesController < ApplicationController
     @pledge = Pledge.new()
     @pledge.userdatum = ud
     @pledge.pledge_type = pledgetype
+    @pledge.pledge_type_id = pledgetype.id
     @pledge.amount = params[:amount]
 
     respond_to do |format|

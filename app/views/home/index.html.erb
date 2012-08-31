@@ -2,6 +2,30 @@
 
 <h1 class="introduction">Food orders, coffee runs, birthday collections and more - made easier with Followthru.</h1>
 
-<% @users.each do |user| %>
-  <p>User: <%=link_to user.name, user %></p>
-<% end %>
+<div class="container-inner">
+
+	<div class="col3 col3-doubleleft">
+	
+		<h2>Most popular projects</h2>
+		
+		<p>SOME WAY TO SHOW A FEW PROJECTS HERE</p>
+		
+		<p><%= link_to 'Check out more projects...', home_browse_path %>
+		
+		<h2>Followthru makes it easy to organise your group activity.</h2>
+		
+		<p>Fatback pork belly cow, pig pancetta meatball ball tip turkey corned beef meatloaf tri-tip biltong. Spare ribs kielbasa bresaola, ribeye pig ground round ball tip turkey. Ham hock shankle pig short loin sausage. Flank ground round chuck swine tongue, prosciutto boudin leberkas capicola turkey venison shankle jowl hamburger ribeye. Short ribs pig frankfurter leberkas. Capicola swine pork chop tail boudin andouille sausage flank ribeye pastrami pork loin leberkas jerky ham hock. Pastrami ribeye chuck, bresaola pork loin capicola ground round short loin flank boudin frankfurter.</p>
+	
+	</div>
+	
+	<div class="col3 col3-right">
+	
+		<h3>Most popular users</h3>
+		
+		<% @users.each do |user| %>
+			<p>User: <%=link_to user.name, user %></p>
+		<% end %>
+	
+	</div>
+
+</div>

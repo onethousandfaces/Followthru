@@ -12,7 +12,8 @@
 </script>
 
 <div ng-controller="ListProjectController">
-  <h2>You have <strong ng-model="projectCount">{{ projects.new.count }}</strong> open projects</h2>
+
+  <h2>You have <strong>{{ projects.new.count }}</strong> new projects</h2>
 
 	<div class="container-inner" ng-hide="projects.new.count">
     You don't have any active projects.
@@ -35,6 +36,43 @@
 			</thead>
 			<tbody>
 				<tr ng-repeat="project in projects.new.items">
+					<td>{{project.id}} {{project.image}}</td>
+					<td>{{project.status}}</td>
+					<td><a href="{{project.viewUrl}}">{{project.name}}</a></td>
+					<td>{{project.desc}}</td>
+					<td>{{project.objective}}</td>
+					<td>{{project.private}}</td>
+					<td><i class="icon icon-eye-open"></i> <a href="{{project.viewUrl}}">Show</a></td>
+					<td><i class="icon icon-edit"></i> <a href="{{project.editUrl}}">Edit</a></td>
+					<td><i class="icon icon-trash"></i> <a href="{{project.deleteUrl}}">Delete</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+  <h2>You have <strong>{{ projects.active.count }}</strong> running projects</h2>
+
+	<div class="container-inner" ng-hide="projects.active.count">
+    You don't have any active projects.
+  </div>
+
+	<div class="container-inner" ng-show="projects.active.count">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Image</th>
+					<th>Status</th>
+					<th>Name</th>
+					<th>Desc</th>
+					<th>Objective</th>
+					<th>Private</th>
+					<th></th>
+					<th></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="project in projects.active.items">
 					<td>{{project.id}} {{project.image}}</td>
 					<td>{{project.status}}</td>
 					<td><a href="{{project.viewUrl}}">{{project.name}}</a></td>

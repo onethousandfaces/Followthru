@@ -2,7 +2,7 @@
 
 <h1 class="introduction">Browse all public projects</h1>
 
-<div ng-controller="ListProjectController">
+<div>
   <h2>There are <strong ng-model="projectCount">{{ projectCount }}</strong> public projects</h2>
 
 	<div class="container-inner">
@@ -21,7 +21,7 @@
           <tr>
             <td><%= project.name %></td>
             <td><%= project.desc %></td>
-            <td><%= link_to "Link", home_browse_path(:id => project.id) %></td>
+            <td><%= link_to "Link", home_show_path(:id => project.id) %></td>
           </tr>
         <% end %>
 			</tbody>

@@ -5,10 +5,17 @@ class HomeController < ApplicationController
   end
 
   def browse_project
-    #if params.has_field?(:id)
-    #else
-      @projects = Project.where("status == ?", Project::ACTIVE)
-    #end
+    @projects = Project.where("status == ?", Project::ACTIVE)
+  end
+
+  # Different to the projects_controller because this one is not limited to owner only.
+  def show_project
+    @project = Project.find(params[:id])
+    @id = @project.id
+    respond_to do |format|
+      format.html { render 'project_control/view' }
+      format.json { render json: @project }
+    end
   end
 
   def create_project

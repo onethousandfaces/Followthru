@@ -6,21 +6,24 @@
   <h2>There are <strong ng-model="projectCount">{{ projectCount }}</strong> public projects</h2>
 
 	<div class="container-inner">
+
 		<table class="table">
 			<thead>
 				<tr>
-					<th>Image</th>
 					<th>Name</th>
-					<th>Desc</th>
+					<th>Description</th>
+					<th>Link</th>
 				</tr>
 			</thead>
 			
 			<tbody>
-				<tr ng-repeat="project in projects">
-					<td>{{project.id}} {{project.image}}</td>
-					<td>{{project.name}}</td>
-					<td>{{project.desc}}</td>
-				</tr>
+        <% @projects.each do |project| %>
+          <tr>
+            <td><%= project.name %></td>
+            <td><%= project.desc %></td>
+            <td><%= link_to "Link", home_browse_path(:id => project.id) %></td>
+          </tr>
+        <% end %>
 			</tbody>
 		
 		</table>

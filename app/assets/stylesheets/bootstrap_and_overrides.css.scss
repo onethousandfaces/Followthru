@@ -89,12 +89,19 @@ h2 {
 		.col3-right {
 			margin-left: 15px;
 		}
+		.col3-doubleleft {
+			width: 720px;
+			margin-right: 15px;
+		}
 	}
 	label {
 		p {
 			padding-left: 0px;
 			padding-right: 0px;
 		}
+	}
+	p.lead-first:first-line {
+		font-weight: bold;
 	}
 }
 

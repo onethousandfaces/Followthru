@@ -30,30 +30,31 @@
     <div>
       Private: <input type="checkbox" ng-model="project.private"/>
     </div>
+    <button>Update project</button>
 
     <div>
       <h3> Pledge Types </h3>
 
-      <div style="border: 1px solid #efefef; padding: 20px; display: inline-block; width: 40%;">
-        Current pledge types:
+      <div style="vertical-align: top; border: 1px solid #efefef; padding: 20px; display: inline-block; width: 40%;">
+        Current pledge types 
 
-        <ul ng-show="PledgeTypes.count">
-          <li ng-repeat="item in PledgeTypes">
-            Name: <input type="text" ng-model="projectType.name"/> --
-            Desc: <input type="text" ng-model="projectType.desc"/> --
-            Image: <input type="text" ng-model="projectType.image"/> --
-            Minimum amount for pledge: {{ projectType.amount }} --
+        <ul ng-show="pledgeTypesCount">
+          <li ng-repeat="item in pledgeTypes">
+            Name: {{item.name}}
+            Desc: {{item.desc}}
+            Image: {{item.image}}
+            Minimum amount for pledge: {{ item.amount }} --
             <button ng-click="editPledgeType({{item.id}})">Edit</button>
             <button ng-click="deletePledgeType({{item.id}})">Delete</button>
           </li>
         </ul>
 
-        <div ng-hide="PledgeTypes.count">
+        <div ng-hide="pledgeTypesCount">
           No current pledge types
         </div>
       </div>
 
-      <div style="border: 1px solid #efefef; padding: 20px; display: inline-block; width: 40%;">
+      <div style="vertical-align: top; border: 1px solid #efefef; padding: 20px; display: inline-block; width: 40%;">
         <div ng-show="pledgeTypeHasErrors">
           Errors saving record:
           <ul>
@@ -68,13 +69,63 @@
         </div>
 
         <div ng-hide="pledgeTypeSuccess">
-          Id: <input type="text" ng-model="projectType.id"/> <br/>
-          Name: <input type="text" ng-model="projectType.name"/> <br/>
-          Desc: <input type="text" ng-model="projectType.desc"/> <br/>
-          Image: <input type="text" ng-model="projectType.image"/> <br/>
-          Minimum amount for pledge: <input type="text" ng-model="projectType.amount"/> <br/>
+          Id: <input type="text" ng-model="pledgeType.id"/> <br/>
+          Name: <input type="text" ng-model="pledgeType.name"/> <br/>
+          Desc: <input type="text" ng-model="pledgeType.desc"/> <br/>
+          Image: <input type="text" ng-model="pledgeType.image"/> <br/>
+          Minimum amount for pledge: <input type="text" ng-model="pledgeType.amount"/> <br/>
           <button ng-click="addPledgeType()">Save</button>
           <button ng-click="resetPledgeType()">New record</button>
+        </div>
+      </div>
+
+    </div>
+
+    <div>
+      <h3> Goals </h3>
+
+      <div style="vertical-align: top; border: 1px solid #efefef; padding: 20px; display: inline-block; width: 40%;">
+        Current goals:
+
+        <ul ng-show="goalsCount">
+          <li ng-repeat="item in goals">
+            Amount: {{ item.total }} --
+            Pledge type: {{ item.pledge_type_id }} --
+            Pledge instances: {{ item.instances }}
+            <button ng-click="editGoal({{item.id}})">Edit</button>
+            <button ng-click="deleteGoal({{item.id}})">Delete</button>
+          </li>
+        </ul>
+
+        <div ng-hide="goalsCount">
+          No current goals
+        </div>
+      </div>
+
+      <div style="vertical-align: top; border: 1px solid #efefef; padding: 20px; display: inline-block; width: 40%;">
+        <div ng-show="goalHasErrors">
+          Errors saving record:
+          <ul>
+            <li ng-repeat="error in goalErrors">
+              {{ error.field }} - {{ error.error }}
+            </li>
+          </ul>
+        </div>
+
+        <div ng-show="goalSuccess">
+          Record added. <a href="#" ng-click="hideGoalSuccess()">hide</a>
+        </div>
+
+        <div ng-hide="goalSuccess">
+          Id: <input type="text" ng-model="goal.id"/> <br/>
+          Minimum amount to succeed: <input type="text" ng-model="goal.total"/> <br/>
+          Pledge type: 
+          <select ng-model="goal.pledge_type_id">
+            <option ng-repeat="item in pledgeTypes" value="{{item.id}}">{{item.name}}</option>
+          </select> <br/>
+          Number of instances of that pledge type (0 for no pledge type): <input type="text" ng-model="goal.instances"/> <br/>
+          <button ng-click="addGoal()">Save</button>
+          <button ng-click="resetGoal()">New record</button>
         </div>
       </div>
 

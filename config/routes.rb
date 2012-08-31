@@ -26,11 +26,7 @@ FollowThru::Application.routes.draw do
     # Dynamic ajax actions
     resources :pledges, :path => "ajax/pledges"
     resources :projects, :path => "ajax/projects"
-    resources :pledge_types, :path => "ajax/pledge_types" do
-      collection do
-        get :query
-      end
-    end
+    resources :pledge_types, :path => "ajax/pledge_types"
     resources :goals, :path => "ajax/goals"
   end
 

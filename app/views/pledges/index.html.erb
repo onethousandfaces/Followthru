@@ -12,8 +12,8 @@
 
 <% @pledges.each do |pledge| %>
   <tr>
-    <td><%= pledge.userdata_id %></td>
-    <td><%= pledge.pledgetype_id %></td>
+    <td><%= pledge.userdatum_id %></td>
+    <td><%= pledge.pledge_type_id %></td>
     <td><%= pledge.amount %></td>
     <td><%= link_to 'Show', pledge %></td>
     <td><%= link_to 'Edit', edit_pledge_path(pledge) %></td>

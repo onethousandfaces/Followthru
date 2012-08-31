@@ -13,7 +13,7 @@
 <% @goals.each do |goal| %>
   <tr>
     <td><%= goal.project_id %></td>
-    <td><%= goal.pledgetype_id %></td>
+    <td><%= goal.pledge_type_id %></td>
     <td><%= goal.total %></td>
     <td><%= link_to 'Show', goal %></td>
     <td><%= link_to 'Edit', edit_goal_path(goal) %></td>

@@ -23,6 +23,17 @@
 			<p class="lead-first">{{project.desc}}</p>
 			
 			<p>PROJECT MENU OPTIONS, PLEDGING, ETC. GOES HERE</p>
+
+      <div ng-hide="pledgeTypeCount">
+        No pledge types for this project.
+      </div>
+
+      <div ng-show="pledgeTypeCount"> 
+        Pledges:
+        <div ng-repeat="item in pledgeTypes">
+          ${{item.amount}} - {{item.name}} - {{item.desc}}
+        </div>
+      </div>
 		
 			<!-- <img src="{{project.image}}" /> -->
 			

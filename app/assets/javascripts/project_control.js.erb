@@ -65,12 +65,17 @@ var ListProjectController = function($scope, Project) {
   });
 }
 
-ListProjectController.$inject = ['$scope', 'Project'];
+ListProjectController.$inject = ['$scope', 'Project', 'PledgeType', 'Pledge'];
 
 /** Controller for view project form */
-var ViewProjectController = function($scope, Project) {
+var ViewProjectController = function($scope, Project, PledgeType, Pledge) {
   $scope.valid = true;
-  $scope.project = new Project()
+  $scope.project = new Project();
+  $scope.pledge = new Pledge();
+  $scope.pledgeTypes = [];
+  $scope.pledgeTypeCount = 0;
+
+  /** Load project info */
   Project.get({id:ViewProjectControllerData.id}, function(data) {
     for (var t in ProjectTypes) {
       if (data.status == ProjectTypes[t].key) {
@@ -79,12 +84,23 @@ var ViewProjectController = function($scope, Project) {
       }
     }
     $scope.project = data;
+
+    /* Get pledge types for this project */
+    PledgeType.get({project_id:$scope.project.id}, function(data) {
+      $scope.pledgeTypes = data;
+      $scope.pledgeTypeCount = data.length;
+    });
+
+    /* Get any pledges made by you for this project */
+    Pledge.get({project_id:$scope.project.id}, function(data) {
+      $scope.myPledges = data;
+    });
   }, function() {
     $scope.valid = false;
   });
 }
 
-ViewProjectController.$inject = ['$scope', 'Project'];
+ViewProjectController.$inject = ['$scope', 'Project', 'PledgeType', 'Pledge'];
 
 /** Controller for view project form */
 var DeleteProjectController = function($scope, Project) {

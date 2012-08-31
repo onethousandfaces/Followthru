@@ -1,5 +1,3 @@
-<img src="/images/home_6.jpg" />
-
 <script>
   window.ViewProjectControllerData = {
     'id' : <%= @id %>
@@ -15,7 +13,27 @@
 
 		<h1>{{project.name}}</h1>
 		
-		<p class="lead-first">{{project.desc}}</p>
+		<p>by USERNAME</p>
+
+		<div class="container-inner">		
+		<div class="col3 col3-doubleleft">
+		
+			<img src="http://placekitten.com/550/300" />
+
+			<p class="lead-first">{{project.desc}}</p>
+		
+			<!-- <img src="{{project.image}}" /> -->
+			
+		</div>
+		
+		<div class="col3 col3-right">
+		
+			<p>Status: {{project.status}}</p>
+			<p>Objective: {{project.objective}}</p>
+			<p>Private: {{project.private}}</p>
+
+		</div>
+		</div>
   
 
 	</div><!-- end of show valid -->

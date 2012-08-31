@@ -110,6 +110,10 @@ h3 {
 		}
 		.col3-right {
 			margin-left: 15px;
+			ul {
+				padding-left: 15px;
+				margin: 5px;
+			}
 		}
 		.col3-doubleleft {
 			width: 720px;
@@ -134,14 +138,26 @@ h3 {
 				box-shadow: 1px 1px 3px rgba(0,0,0,.15);
 				border: solid 1px #eee;
 				padding: 8px;
+				min-height: 280px;
+				margin-bottom: 10px;
+				position: relative;
 				img {
 					margin: 0px auto;
+					margin-top: 5px;
 					display: block;
 					margin-bottom: 10px;
 				}
-				button {
-					margin: 0px auto;
-					display: block;
+				.go-pledge {
+					position: absolute;
+					bottom:0;
+					width: 210px;
+					text-align: center;
+					border-top: solid 1px #eee;
+					padding-bottom: 10px;
+					button {
+						margin: 0px auto;
+						display: block;
+					}
 				}
 			}
 		}

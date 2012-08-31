@@ -40,7 +40,12 @@ class PledgesController < ApplicationController
   # POST /pledges
   # POST /pledges.json
   def create
-    @pledge = Pledge.new(params[:pledge])
+    ud = UserDataFactory.new.get current_user, Userdatum
+    pledgetype = PledgeType.find(params[:pledge_type_id])
+    @pledge = Pledge.new()
+    @pledge.userdatum = ud
+    @pledge.pledge_type = pledgetype
+    @pledge.amount = params[:amount]
 
     respond_to do |format|
       if @pledge.save

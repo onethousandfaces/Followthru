@@ -68,7 +68,7 @@ var ListProjectController = function($scope, Project) {
 ListProjectController.$inject = ['$scope', 'Project', 'PledgeType', 'Pledge'];
 
 /** Controller for view project form */
-var ViewProjectController = function($scope, Project, PledgeType, Pledge) {
+var ViewProjectController = function($scope, Project, PledgeType, Pledge, Goal) {
   $scope.valid = true;
   $scope.project = new Project();
   $scope.pledgeTypes = [];
@@ -76,6 +76,7 @@ var ViewProjectController = function($scope, Project, PledgeType, Pledge) {
   $scope.myPledges = [];
   $scope.myPledgeCount = 0;
   $scope.pledge = new Pledge();
+  $scope.pledge.amount = 0;
   $scope.pledgeSuccess = false;
   $scope.pledgeFailed = false;
   $scope.pledgeErrors = [];
@@ -109,6 +110,13 @@ var ViewProjectController = function($scope, Project, PledgeType, Pledge) {
     PledgeType.query({project_id:$scope.project.id}, function(data) {
       $scope.pledgeTypes = data;
       $scope.pledgeTypeCount = data.length;
+      $scope.pledge.pledge_type_id = $scope.pledgeTypeCount ? $scope.pledgeTypes[0].id : 0;
+    });
+
+    /* Get goals for this project */
+    Goal.query({project_id:$scope.project.id}, function(data) {
+      $scope.goals = data;
+      $scope.goalCount = data.length;
     });
 
     /* Get any pledges made by you for this project */
@@ -121,7 +129,7 @@ var ViewProjectController = function($scope, Project, PledgeType, Pledge) {
   });
 }
 
-ViewProjectController.$inject = ['$scope', 'Project', 'PledgeType', 'Pledge'];
+ViewProjectController.$inject = ['$scope', 'Project', 'PledgeType', 'Pledge', 'Goal'];
 
 /** Controller for view project form */
 var DeleteProjectController = function($scope, Project) {

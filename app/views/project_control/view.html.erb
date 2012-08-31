@@ -75,6 +75,14 @@
 			
 			<p>This is a PRIVATE/PUBLIC project. {{project.private}}</p>
 
+      <div>
+        Goals:
+        <ul>
+          <li ng-repeat="item in goals">
+            ${{item.amount}}, {{item.pledge_type_id}} x {{item.instances}}
+          </li>
+      </div>
+
 		</div>
 
   </div>
